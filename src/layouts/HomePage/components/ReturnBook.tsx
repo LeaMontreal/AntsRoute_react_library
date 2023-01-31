@@ -4,7 +4,7 @@ export const ReturnBook = () => {
       {/* card */}
       <div className="text-center">
         <img
-          src={require("./../../Images/BooksImages/book-luv2code-1000.png")}
+          src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
           width="151"
           height="233"
           alt="book"
