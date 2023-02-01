@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import BookModel from "../../models/BookModel";
+import { Pagination } from "../Utils/Pagination";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { SearchBook } from "./components/SearchBook";
 
@@ -7,6 +8,14 @@ export const SearchBooksPage = () => {
   const [books, setBooks] = useState<BookModel[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+
+  // change current page number
+  const paginate = (pageNumber: number)=>{
+    setCurrentPage(pageNumber);
+  }
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -47,6 +56,10 @@ export const SearchBooksPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
+
+    // test code for Pagination component
+    setCurrentPage(2);
+    setTotalPages(2);
   }, []);
 
   if (isLoading) {
@@ -133,6 +146,9 @@ export const SearchBooksPage = () => {
               <SearchBook book={book} key={book.id} />
             ))}
           </>
+
+          {/* Pagination */}
+          <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}/>
         </div>
       </div>
     </div>

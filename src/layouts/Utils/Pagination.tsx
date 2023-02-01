@@ -3,7 +3,7 @@ export const Pagination: React.FC<{
   totalPages: number;
   paginate: any;
 }> = (props) => {
-    // generate page number list
+  // generate page number list
   const pageNumbers = [];
 
   if (props.currentPage === 1) {
@@ -32,5 +32,21 @@ export const Pagination: React.FC<{
     }
   }
 
-  return <nav></nav>;
+  return (
+    <nav aria-label="...">
+      <ul className="pagination">
+        <li className="page-item">
+          <button className="page-link">First Page</button>
+        </li>
+        {pageNumbers.map((number) => (
+          <li key={number}>
+            <button className="page-link">{number}</button>
+          </li>
+        ))}
+        <li className="page-item">
+          <button className="page-link">Last Page</button>
+        </li>
+      </ul>
+    </nav>
+  );
 };
