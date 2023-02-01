@@ -1,6 +1,53 @@
+import { useEffect, useState } from "react";
+import BookModel from "../../../models/BookModel";
 import { ReturnBook } from "./ReturnBook";
 
 export const Carousel = () => {
+  const [books, setBooks] = useState<BookModel[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState(null);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const baseUrl: string = "http://localhost:8080/api/v1/books";
+
+      const url: string = `${baseUrl}?page=0&size=9`;
+
+      const response = await fetch(url);
+
+      // guard clause
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const responseJson = await response.json();
+      const responseData = responseJson._embedded.books;
+
+      const loadedBooks: BookModel[] = [];
+      for (const key in responseData) {
+        loadedBooks.push({
+          id: responseData[key].id,
+          title: responseData[key].title,
+          author: responseData[key].author,
+          description: responseData[key].description,
+          copies: responseData[key].copies,
+          copiesAvailable: responseData[key].copiesAvailable,
+          category: responseData[key].category,
+          img: responseData[key].img,
+        });
+      }
+
+      setBooks(loadedBooks);
+      setIsLoading(false);
+    };
+
+    // catch exception
+    fetchBooks().catch((error: any) => {
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
+  }, []);
+
   return (
     <div className="container mt-5" style={{ height: 550 }}>
       <div className="homepage-carousel-title">
