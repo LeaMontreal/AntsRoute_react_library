@@ -6,19 +6,10 @@ export const ReturnBook: React.FC<{ book: BookModel }> = (props) => {
       {/* card */}
       <div className="text-center">
         {props.book.img ? (
-          <img
-            src={props.book.img}
-            width="151"
-            height="233"
-            alt="book"
-          />
+          <img src={props.book.img} width="151" height="233" alt="book" />
         ) : (
-          <img
-            src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
-            width="151"
-            height="233"
-            alt="book"
-          />
+          <img src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
+            width="151" height="233" alt="book" />
         )}
         <h6 className="mt-2">{props.book.title}</h6>
         <p>{props.book.author}</p>
