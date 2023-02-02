@@ -11,6 +11,8 @@ export const SearchBooksPage = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [booksPerPage] = useState(5);
+  const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
 
   // change current page number
   const paginate = (pageNumber: number) => {
@@ -21,7 +23,10 @@ export const SearchBooksPage = () => {
     const fetchBooks = async () => {
       const baseUrl: string = "http://localhost:8080/api/v1/books";
 
-      const url: string = `${baseUrl}?page=0&size=5`;
+      // currentPage in BackEnd is 0 based, in FrontEnd is 1 based
+      const url: string = `${baseUrl}?page=${
+        currentPage - 1
+      }&size=${booksPerPage}`;
 
       const response = await fetch(url);
 
@@ -32,6 +37,9 @@ export const SearchBooksPage = () => {
 
       const responseJson = await response.json();
       const responseData = responseJson._embedded.books;
+
+      setTotalAmountOfBooks(responseJson.page.totalElements);
+      setTotalPages(responseJson.page.totalPages);
 
       const loadedBooks: BookModel[] = [];
       for (const key in responseData) {
@@ -58,8 +66,8 @@ export const SearchBooksPage = () => {
     });
 
     // test code for Pagination component
-    setCurrentPage(2);
-    setTotalPages(2);
+    // setCurrentPage(2);
+    // setTotalPages(2);
   }, []);
 
   if (isLoading) {
