@@ -4,7 +4,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark main-color py-3">
       <div className="container-fluid">
-        <span className="navbar-brand">Luv 2 Read</span>
+        <span className="navbar-brand">Ants Route</span>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,7 +25,9 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-            <NavLink className='nav-link' to='/search'>Search Books</NavLink>
+              <NavLink className="nav-link" to="/search">
+                Search Books
+              </NavLink>
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
