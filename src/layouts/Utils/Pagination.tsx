@@ -32,6 +32,8 @@ export const Pagination: React.FC<{
     }
   }
 
+  //   console.log(pageNumbers);
+
   return (
     <nav aria-label="...">
       <ul className="pagination">
@@ -39,7 +41,12 @@ export const Pagination: React.FC<{
           <button className="page-link">First Page</button>
         </li>
         {pageNumbers.map((number) => (
-          <li key={number} className={'page-item' + (props.currentPage === number ? 'active' : '')}>
+          <li
+            key={number}
+            className={
+              "page-item " + (props.currentPage === number ? "active" : "")
+            }
+          >
             <button className="page-link">{number}</button>
           </li>
         ))}

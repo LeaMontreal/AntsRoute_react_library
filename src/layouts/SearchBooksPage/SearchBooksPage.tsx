@@ -13,9 +13,9 @@ export const SearchBooksPage = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   // change current page number
-  const paginate = (pageNumber: number)=>{
+  const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-  }
+  };
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -148,7 +148,11 @@ export const SearchBooksPage = () => {
           </>
 
           {/* Pagination */}
-          <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}/>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            paginate={paginate}
+          />
         </div>
       </div>
     </div>
