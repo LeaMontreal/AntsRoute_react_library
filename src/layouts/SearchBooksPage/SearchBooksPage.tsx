@@ -68,7 +68,7 @@ export const SearchBooksPage = () => {
     // test code for Pagination component
     // setCurrentPage(2);
     // setTotalPages(2);
-  }, []);
+  }, [currentPage]);
 
   if (isLoading) {
     return <SpinnerLoading />;
