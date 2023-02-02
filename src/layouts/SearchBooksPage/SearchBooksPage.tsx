@@ -14,6 +14,13 @@ export const SearchBooksPage = () => {
   const [booksPerPage] = useState(5);
   const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
 
+  const indexOfLastBook: number = currentPage * booksPerPage;
+  const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
+  let lastItem =
+    booksPerPage * currentPage <= totalAmountOfBooks
+      ? booksPerPage * currentPage
+      : totalAmountOfBooks;
+
   // change current page number
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -64,6 +71,8 @@ export const SearchBooksPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
+
+    window.scrollTo(0, 0);
 
     // test code for Pagination component
     // setCurrentPage(2);
@@ -147,9 +156,12 @@ export const SearchBooksPage = () => {
           {/* List of search result */}
           <>
             <div className="mt-3">
-              <h5>Number of results: </h5>
+              <h5>Number of results: ({totalAmountOfBooks})</h5>
             </div>
-            <p>items:</p>
+            <p>
+              {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks}{" "}
+              items:
+            </p>
             {books.map((book) => (
               <SearchBook book={book} key={book.id} />
             ))}
