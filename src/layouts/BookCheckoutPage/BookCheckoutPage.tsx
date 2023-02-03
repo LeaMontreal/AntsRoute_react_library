@@ -57,7 +57,57 @@ export const BookCheckoutPage = () => {
     });
   }, []);
 
-  if (isLoading) {
+  useEffect(() => {
+    const fetchBookReviews = async () => {
+      const reviewUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
+
+      const responseReviews = await fetch(reviewUrl);
+
+      if (!responseReviews.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const responseJsonReviews = await responseReviews.json();
+
+      const responseData = responseJsonReviews._embedded.reviews;
+
+      const loadedReviews: ReviewModel[] = [];
+
+      let weightedStarReviews: number = 0;
+
+      for (const key in responseData) {
+        loadedReviews.push({
+          id: responseData[key].id,
+          userEmail: responseData[key].userEmail,
+          date: responseData[key].date,
+          rating: responseData[key].rating,
+          book_id: responseData[key].bookId,
+          reviewDescription: responseData[key].reviewDescription,
+        });
+
+        // calculate weighted stars
+        weightedStarReviews = weightedStarReviews + responseData[key].rating;
+      }
+
+      if (loadedReviews) {
+        // round stars to .5 or .0, like 3.5, 4.0
+        const round = (
+          Math.round((weightedStarReviews / loadedReviews.length) * 2) / 2
+        ).toFixed(1);
+        setTotalStars(Number(round));
+      }
+
+      setReviews(loadedReviews);
+      setIsLoadingReview(false);
+    };
+
+    fetchBookReviews().catch((error: any) => {
+      setIsLoadingReview(false);
+      setHttpError(error.message);
+    });
+  }, []);
+
+  if (isLoading || isLoadingReview) {
     return <SpinnerLoading />;
   }
 
