@@ -14,13 +14,14 @@ import LoginWidget from "./Auth/LoginWidget";
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
+console.log(oktaAuth);
+
 export const App = () => {
-  const history = useHistory();
 
   const customAuthHandler = () => {
     history.push("/login");
-  };
-
+  }
+  const history = useHistory();
   const restoreOriginalUri = async (_oktaAuth: any, originalUri: any) => {
     history.replace(toRelativeUrl(originalUri || "/", window.location.origin));
   };
@@ -62,4 +63,4 @@ export const App = () => {
       </Security>
     </div>
   );
-};
+}
