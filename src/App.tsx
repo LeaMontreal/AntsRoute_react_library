@@ -12,7 +12,7 @@ import { oktaConfig } from "./lib/oktaConfig";
 import { Security, LoginCallback } from "@okta/okta-react"; // manually import
 import LoginWidget from "./Auth/LoginWidget";
 
-const oktaAuth = new OktaAuth(oktaConfig);
+const oktaAuth = new OktaAuth(oktaConfig.oidc);
 
 console.log(oktaAuth);
 
@@ -53,7 +53,8 @@ export const App = () => {
 
             <Route
               path="/login"
-              render={() => <LoginWidget config={oktaConfig} />}
+              // render={() => <LoginWidget config={oktaConfig} />}
+              render={()=><LoginWidget config={oktaConfig.oidc} />}
             />
             <Route path="/login/callback" component={LoginCallback} />
           </Switch>

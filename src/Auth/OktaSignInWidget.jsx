@@ -13,7 +13,7 @@ const OktaSignInWidget = ({ onSucess, onError }) => {
     }
 
     // use config infor (ClientId, Issuer...) to create widget object
-    const widget = new OktaSignIn(oktaConfig);
+    const widget = new OktaSignIn(oktaConfig.widget);
 
     console.log('OktaSignInWidget start render the widget...');
     // Search for URL Parameters to see if a user is being routed to the application to recover password
