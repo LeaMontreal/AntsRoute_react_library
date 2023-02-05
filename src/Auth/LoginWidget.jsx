@@ -17,7 +17,9 @@ const LoginWidget = ({ config }) => {
 
   // auth process haven't finished
   if (!authState) {
-    return <SpinnerLoading />;
+    // return <SpinnerLoading />;
+    console.log(`authState = false`);
+    return <div>Login Loading ...</div>;
   }
 
   // take unAuthenticated user to Login component

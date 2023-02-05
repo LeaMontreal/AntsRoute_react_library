@@ -16,11 +16,17 @@ const OktaSignInWidget = ({ onSucess, onError }) => {
     const widget = new OktaSignIn(oktaConfig);
 
     console.log('OktaSignInWidget start render the widget...');
+    // Search for URL Parameters to see if a user is being routed to the application to recover password
+   var searchParams = new URL(window.location.href).searchParams;
+   widget.otp = searchParams.get('otp');
+   widget.state = searchParams.get('state');
     // render the widget, assign the widget instance to widgetRef.current
     widget
       .showSignInToGetTokens({ el: widgetRef.current })
       .then(onSucess)
       .catch(onError);
+
+      return () => widget.remove();
   }, [onSucess, onError]);
 
   return (

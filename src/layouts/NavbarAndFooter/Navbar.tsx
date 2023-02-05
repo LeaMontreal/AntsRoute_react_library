@@ -7,7 +7,8 @@ export const Navbar = () => {
   const history = useHistory();
 
   if (!authState) {
-    return <SpinnerLoading />;
+    // return <SpinnerLoading />;
+    return <div>Loading ...</div>;
   }
 
   const handleLogin = async () => history.push('/login');
