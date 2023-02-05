@@ -24,7 +24,7 @@ const LoginWidget = ({ config }) => {
   return authState.isAuthenticated ? (
     <Redirect to={{ pathname: "/" }} />
   ) : (
-    <OktaSignInWiget />
+    <OktaSignInWiget config={config} onSuccess={onSuccess} onError={onError} />
   );
 };
 
