@@ -43,8 +43,6 @@ export const Heros = () => {
         </div>
         </div>
         
-        </div>
-        
         {/* Mobile Heros */}
         <div className="d-lg-none">
           <div className="container">
