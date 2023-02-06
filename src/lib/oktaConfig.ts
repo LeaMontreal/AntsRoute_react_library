@@ -15,7 +15,8 @@ export const oktaConfig = {
     redirectUri: `http://localhost:3000/login/callback`,
     scopes: ['openid', 'profile', 'email'],
     pkce: true,
-    disableHttpsCheck: true
+    disableHttpsCheck: true,
+    useClassicEngine: true
     },
     widget: {
         issuer: 'https://dev-19018177.okta.com/oauth2/default',
