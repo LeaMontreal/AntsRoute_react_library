@@ -41,7 +41,8 @@ export const Heros = () => {
             <div className="col-image-right"></div>
           </div>
         </div>
-
+        </div>
+        
         {/* Mobile Heros */}
         <div className="d-lg-none">
           <div className="container">
@@ -71,7 +72,7 @@ export const Heros = () => {
             </div>
           </div>
         </div>
-      </div>
+
     </div>
   );
 };
