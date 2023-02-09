@@ -195,7 +195,12 @@ export const BookCheckoutPage = () => {
     });
   }, []);
 
-  if (isLoading || isLoadingReview || isLoadingCurrentLoansCount) {
+  if (
+    isLoading ||
+    isLoadingReview ||
+    isLoadingCurrentLoansCount ||
+    isLoadingBookCheckedOut
+  ) {
     return <SpinnerLoading />;
   }
 
