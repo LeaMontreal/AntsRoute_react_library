@@ -70,7 +70,7 @@ export const BookCheckoutPage = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, []);
+  }, [isCheckedOut]);
 
   // fetchBookReviews
   useEffect(() => {
@@ -212,6 +212,22 @@ export const BookCheckoutPage = () => {
     );
   }
 
+  async function checkoutBook() {
+    const url = `http://localhost:8080/api/v1/books/secure/checkout/?bookId=${book?.id}`;
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    const checkoutResponse = await fetch(url, requestOptions);
+    if (!checkoutResponse.ok) {
+      throw new Error("Something went wrong!");
+    }
+    setIsCheckedOut(true);
+  }
+
   return (
     <div>
       {/* Desktop */}
@@ -245,6 +261,7 @@ export const BookCheckoutPage = () => {
             isAuthenticated={true}
             // isAuthenticated={authState?.isAuthenticated}
             isCheckedOut={isCheckedOut}
+            checkoutBook={checkoutBook}
           />
         </div>
         <hr />
@@ -281,6 +298,7 @@ export const BookCheckoutPage = () => {
           isAuthenticated={true}
           // isAuthenticated={authState?.isAuthenticated}
           isCheckedOut={isCheckedOut}
+          checkoutBook={checkoutBook}
         />
         <hr />
         <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />
