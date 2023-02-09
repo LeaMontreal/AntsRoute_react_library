@@ -159,8 +159,7 @@ export const BookCheckoutPage = () => {
       setIsLoadingCurrentLoansCount(false);
       setHttpError(error.message);
     });
-  }, []);
-  // myDebugForOkta
+  }, [isCheckedOut]);
 
   // fetchUserCheckedOutBook
   useEffect(() => {
@@ -217,7 +216,10 @@ export const BookCheckoutPage = () => {
     const requestOptions = {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        // myDebugForOkta
+        Authorization: `Bearer `,
+        // myDebugForOkta
+        // ${authState?.accessToken?.accessToken}`,
         "Content-Type": "application/json",
       },
     };
