@@ -11,10 +11,10 @@ export const Navbar = () => {
     return <div>Loading ...</div>;
   }
 
-  const handleLogin = async () => history.push('/login');
+  const handleLogin = async () => history.push("/login");
   const handleLogout = async () => oktaAuth.signOut();
 
-  console.log('authState: ');
+  console.log("authState: ");
   console.log(authState);
 
   return (
@@ -47,7 +47,12 @@ export const Navbar = () => {
             </li>
           </ul>
           <ul className="navbar-nav ms-auto">
-            {authState.isAuthenticated ? (
+            {/* myDebugForOkta */}
+            <li className="nav-item m-1">
+              <button className="btn btn-outline-light">Logout</button>
+            </li>
+
+            {/* {authState.isAuthenticated ? (
               <li className="nav-item m-1">
                 <button className="btn btn-outline-light" onClick={handleLogout}>Logout</button>
               </li>
@@ -60,7 +65,7 @@ export const Navbar = () => {
                   Login
                 </button>
               </li>
-            )}
+            )} */}
           </ul>
         </div>
       </div>

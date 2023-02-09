@@ -165,12 +165,16 @@ export const BookCheckoutPage = () => {
   // fetchUserCheckedOutBook
   useEffect(() => {
     const fetchUserCheckedOutBook = async () => {
-      if (authState && authState.isAuthenticated) {
+      // myDebugForOkta
+      // if (authState && authState.isAuthenticated)
+      {
         const url = `http://localhost:8080/api/v1/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
         const requestOptions = {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            // ${authState.accessToken?.accessToken}`,
             "Content-Type": "application/json",
           },
         };
@@ -232,7 +236,9 @@ export const BookCheckoutPage = () => {
             book={book}
             mobile={false}
             currentLoansCount={currentLoansCount}
-            isAuthenticated={authState?.isAuthenticated}
+            // myDebugForOkta
+            isAuthenticated={true}
+            // isAuthenticated={authState?.isAuthenticated}
             isCheckedOut={isCheckedOut}
           />
         </div>
@@ -266,7 +272,9 @@ export const BookCheckoutPage = () => {
           book={book}
           mobile={true}
           currentLoansCount={currentLoansCount}
-          isAuthenticated={authState?.isAuthenticated}
+          // myDebugForOkta
+          isAuthenticated={true}
+          // isAuthenticated={authState?.isAuthenticated}
           isCheckedOut={isCheckedOut}
         />
         <hr />
