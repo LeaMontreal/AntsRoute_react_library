@@ -24,9 +24,14 @@ export const BookCheckoutPage = () => {
   const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] =
     useState(true);
 
+  // Is Book Check Out?
+  const [isCheckedOut, setIsCheckedOut] = useState(false);
+  const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState(true);
+
   // const pathInfo = window.location.pathname;
   const bookId = window.location.pathname.split("/")[2];
 
+  // only for debug
   useEffect(() => {
     // console.log(`pathInfo: ` + pathInfo);
   }, []);
@@ -152,6 +157,36 @@ export const BookCheckoutPage = () => {
     };
     fetchUserCurrentLoansCount().catch((error: any) => {
       setIsLoadingCurrentLoansCount(false);
+      setHttpError(error.message);
+    });
+  }, []);
+  // myDebugForOkta
+
+  // fetchUserCheckedOutBook
+  useEffect(() => {
+    const fetchUserCheckedOutBook = async () => {
+      if (authState && authState.isAuthenticated) {
+        const url = `http://localhost:8080/api/v1/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        };
+        const bookCheckedOut = await fetch(url, requestOptions);
+
+        if (!bookCheckedOut.ok) {
+          throw new Error("Something went wrong!");
+        }
+
+        const bookCheckedOutResponseJson = await bookCheckedOut.json();
+        setIsCheckedOut(bookCheckedOutResponseJson);
+      }
+      setIsLoadingBookCheckedOut(false);
+    };
+    fetchUserCheckedOutBook().catch((error: any) => {
+      setIsLoadingBookCheckedOut(false);
       setHttpError(error.message);
     });
   }, []);
