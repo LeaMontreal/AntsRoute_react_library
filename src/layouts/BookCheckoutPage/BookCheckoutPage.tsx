@@ -5,8 +5,11 @@ import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { StarsReview } from "../Utils/StarsReview";
 import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 import { LatestReviews } from "./LatestReviews";
+import { useOktaAuth } from "@okta/okta-react"; // manually add this correct lib
 
 export const BookCheckoutPage = () => {
+  const { authState } = useOktaAuth();
+
   const [book, setBook] = useState<BookModel>();
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
@@ -16,6 +19,11 @@ export const BookCheckoutPage = () => {
   const [totalStars, setTotalStars] = useState(0);
   const [isLoadingReview, setIsLoadingReview] = useState(true);
 
+  // Loans Count State
+  const [currentLoansCount, setCurrentLoansCount] = useState(0);
+  const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] =
+    useState(true);
+
   // const pathInfo = window.location.pathname;
   const bookId = window.location.pathname.split("/")[2];
 
@@ -23,6 +31,7 @@ export const BookCheckoutPage = () => {
     // console.log(`pathInfo: ` + pathInfo);
   }, []);
 
+  // fetchBooks
   useEffect(() => {
     const fetchBooks = async () => {
       const url: string = `http://localhost:8080/api/v1/books/${bookId}`;
@@ -58,6 +67,7 @@ export const BookCheckoutPage = () => {
     });
   }, []);
 
+  // fetchBookReviews
   useEffect(() => {
     const fetchBookReviews = async () => {
       const reviewUrl: string = `http://localhost:8080/api/v1/reviews/search/findByBookId?bookId=${bookId}`;
@@ -108,7 +118,45 @@ export const BookCheckoutPage = () => {
     });
   }, []);
 
-  if (isLoading || isLoadingReview) {
+  // fetchUserCurrentLoansCount
+  useEffect(() => {
+    const fetchUserCurrentLoansCount = async () => {
+      // myDebugForOkta
+      // if (authState && authState.isAuthenticated)
+      {
+        const url = `http://localhost:8080/api/v1/books/secure/currentloans/count`;
+        // Add jwt token into request header
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            //  Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        };
+        console.log(`send request`);
+        const currentLoansCountResponse = await fetch(url, requestOptions);
+
+        if (!currentLoansCountResponse.ok) {
+          throw new Error("Something went wrong!");
+        }
+
+        const currentLoansCountResponseJson =
+          await currentLoansCountResponse.json();
+
+        console.log(currentLoansCountResponseJson);
+        setCurrentLoansCount(currentLoansCountResponseJson);
+      }
+      setIsLoadingCurrentLoansCount(false);
+    };
+    fetchUserCurrentLoansCount().catch((error: any) => {
+      setIsLoadingCurrentLoansCount(false);
+      setHttpError(error.message);
+    });
+  }, []);
+
+  if (isLoading || isLoadingReview || isLoadingCurrentLoansCount) {
     return <SpinnerLoading />;
   }
 
@@ -145,7 +193,11 @@ export const BookCheckoutPage = () => {
               <StarsReview rating={totalStars} size={32} />
             </div>
           </div>
-          <CheckoutAndReviewBox book={book} mobile={false} />
+          <CheckoutAndReviewBox
+            book={book}
+            mobile={false}
+            currentLoansCount={currentLoansCount}
+          />
         </div>
         <hr />
         <LatestReviews reviews={reviews} bookId={book?.id} mobile={false} />
@@ -173,7 +225,11 @@ export const BookCheckoutPage = () => {
             <StarsReview rating={totalStars} size={32} />
           </div>
         </div>
-        <CheckoutAndReviewBox book={book} mobile={true} />
+        <CheckoutAndReviewBox
+          book={book}
+          mobile={true}
+          currentLoansCount={currentLoansCount}
+        />
         <hr />
         <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />
       </div>
