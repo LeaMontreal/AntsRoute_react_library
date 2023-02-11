@@ -129,12 +129,16 @@ export const BookCheckoutPage = () => {
   // fetchUserReviewBook
   useEffect(() => {
     const fetchUserReviewBook = async () => {
-      if (authState && authState.isAuthenticated) {
+      // myDebugForOkta
+      // if (authState && authState.isAuthenticated)
+      {
         const url = `http://localhost:8080/api/v1/reviews/secure/user/book/?bookId=${bookId}`;
         const requestOptions = {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            // ${authState.accessToken?.accessToken}`,
             "Content-Type": "application/json",
           },
         };
@@ -145,6 +149,7 @@ export const BookCheckoutPage = () => {
 
         // API return true/false means if the user left a review for this bookId or not
         const userReviewResponseJson = await userReview.json();
+        console.log(`userReviewResponseJson: ${userReviewResponseJson}`);
         setIsReviewLeft(userReviewResponseJson);
       }
 
@@ -156,7 +161,9 @@ export const BookCheckoutPage = () => {
       setIsLoadingUserReview(false);
       setHttpError(error.message);
     });
-  }, [authState]);
+  }, []);
+  // myDebugForOkta
+  // authState
 
   // fetchUserCurrentLoansCount
   useEffect(() => {
@@ -175,7 +182,7 @@ export const BookCheckoutPage = () => {
             "Content-Type": "application/json",
           },
         };
-        console.log(`send request`);
+        // console.log(`send request`);
         const currentLoansCountResponse = await fetch(url, requestOptions);
 
         if (!currentLoansCountResponse.ok) {
@@ -185,7 +192,7 @@ export const BookCheckoutPage = () => {
         const currentLoansCountResponseJson =
           await currentLoansCountResponse.json();
 
-        console.log(currentLoansCountResponseJson);
+        // console.log(currentLoansCountResponseJson);
         setCurrentLoansCount(currentLoansCountResponseJson);
       }
       setIsLoadingCurrentLoansCount(false);

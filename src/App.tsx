@@ -14,13 +14,14 @@ import LoginWidget from "./Auth/LoginWidget";
 
 const oktaAuth = new OktaAuth(oktaConfig.oidc);
 
-console.log(oktaAuth);
+// myDebugForOkta
+// console.log(oktaAuth);
 
 export const App = () => {
   const history = useHistory();
   const customAuthHandler = () => {
     history.push("/login");
-  }
+  };
 
   const restoreOriginalUri = async (_oktaAuth: any, originalUri: any) => {
     history.replace(toRelativeUrl(originalUri || "/", window.location.origin));
@@ -54,7 +55,7 @@ export const App = () => {
             <Route
               path="/login"
               // render={() => <LoginWidget config={oktaConfig} />}
-              render={()=><LoginWidget config={oktaConfig.oidc} />}
+              render={() => <LoginWidget config={oktaConfig.oidc} />}
             />
             <Route path="/login/callback" component={LoginCallback} />
           </Switch>
@@ -64,4 +65,4 @@ export const App = () => {
       </Security>
     </div>
   );
-}
+};
