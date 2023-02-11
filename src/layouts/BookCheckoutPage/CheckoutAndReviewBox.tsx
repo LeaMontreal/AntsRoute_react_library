@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BookModel from "../../models/BookModel";
+import { LeaveAReview } from "../Utils/LeaveAReview";
 
 export const CheckoutAndReviewBox: React.FC<{
   book: BookModel | undefined;
@@ -42,7 +43,7 @@ export const CheckoutAndReviewBox: React.FC<{
     if (props.isAuthenticated && !props.isReviewLeft) {
       return (
         <p>
-          <b>Add Review Button</b>
+          <LeaveAReview />
         </p>
       );
     } else if (props.isAuthenticated && props.isReviewLeft) {
@@ -52,7 +53,7 @@ export const CheckoutAndReviewBox: React.FC<{
         </p>
       );
     }
-    
+
     return (
       <div>
         <hr />
