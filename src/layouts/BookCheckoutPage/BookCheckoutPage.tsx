@@ -289,7 +289,9 @@ export const BookCheckoutPage = () => {
     const requestOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: `Bearer `,
+        // myDebugForOkta
+        // ${authState?.accessToken?.accessToken}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(reviewRequestModel),
