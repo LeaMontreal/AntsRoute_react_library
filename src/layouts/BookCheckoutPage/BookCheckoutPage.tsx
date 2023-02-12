@@ -32,6 +32,7 @@ export const BookCheckoutPage = () => {
   const [isCheckedOut, setIsCheckedOut] = useState(false);
   const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState(true);
 
+  // get bookId from path parameter
   // const pathInfo = window.location.pathname;
   const bookId = window.location.pathname.split("/")[2];
 

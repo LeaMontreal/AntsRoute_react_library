@@ -23,7 +23,7 @@ export const SearchBooksPage = () => {
   const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
   let lastItem =
     booksPerPage * currentPage <= totalAmountOfBooks
-      ? booksPerPage * currentPage
+      ? indexOfLastBook
       : totalAmountOfBooks;
 
   // change current page number
