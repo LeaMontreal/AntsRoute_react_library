@@ -275,6 +275,7 @@ export const BookCheckoutPage = () => {
 
   async function submitReview(starInput: number, reviewDescription: string) {
     let bookId: number = 0;
+    // get current bookId
     if (book?.id) {
       bookId = book.id;
     }
@@ -335,6 +336,7 @@ export const BookCheckoutPage = () => {
             isCheckedOut={isCheckedOut}
             checkoutBook={checkoutBook}
             isReviewLeft={isReviewLeft}
+            submitReview={submitReview}
           />
         </div>
         <hr />
@@ -373,6 +375,7 @@ export const BookCheckoutPage = () => {
           isCheckedOut={isCheckedOut}
           checkoutBook={checkoutBook}
           isReviewLeft={isReviewLeft}
+          submitReview={submitReview}
         />
         <hr />
         <LatestReviews reviews={reviews} bookId={book?.id} mobile={true} />
