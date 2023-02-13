@@ -42,7 +42,7 @@ export const Loans = () => {
 
     // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
-  }, []);
+  }, [authState]);
 
   if (isLoadingUserLoans) {
     return <SpinnerLoading />;
@@ -56,5 +56,15 @@ export const Loans = () => {
     );
   }
 
-  return <div></div>;
+  return (<div>
+    {/* Desktop */}
+    <div>
+
+    </div>
+
+    {/* Mobile */}
+    <div>
+        
+    </div>
+  </div>);
 };
