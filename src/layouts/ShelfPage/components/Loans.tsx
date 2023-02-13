@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ShelfCurrentLoans from "../../../models/ShelfCurrentLoans";
 import { useOktaAuth } from "@okta/okta-react"; // manually add
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Link } from "react-router-dom";
 
 export const Loans = () => {
   const { authState } = useOktaAuth();
@@ -56,23 +57,26 @@ export const Loans = () => {
     );
   }
 
-  return (<div>
-    {/* Desktop */}
-    <div className='d-none d-lg-block mt-2'>
-    {shelfCurrentLoans.length > 0 ? 
-    // List of loans
-    <>
-    </>
-    :
-    // No loans
-    <>
-    </>
-    }
-    </div>
-
-    {/* Mobile */}
+  return (
     <div>
+      {/* Desktop */}
+      <div className="d-none d-lg-block mt-2">
+        {shelfCurrentLoans.length > 0 ? (
+          // List of loans
+          <></>
+        ) : (
+          // No loans
+          <>
+            <h3 className="mt-3">Currently no loans</h3>
+            <Link className="btn btn-primary" to={`search`}>
+              Search for a new book
+            </Link>
+          </>
+        )}
+      </div>
 
+      {/* Mobile */}
+      <div></div>
     </div>
-  </div>);
+  );
 };
