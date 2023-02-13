@@ -63,7 +63,14 @@ export const Loans = () => {
       <div className="d-none d-lg-block mt-2">
         {shelfCurrentLoans.length > 0 ? (
           // List of loans
-          <></>
+          <>
+              <h5>Current Loans: </h5>
+              {shelfCurrentLoans.map(shelfCurrentLoan=>(
+                <div key={shelfCurrentLoan.book.id}>
+
+                </div>
+              ))}
+          </>
         ) : (
           // No loans
           <>
