@@ -58,13 +58,21 @@ export const Loans = () => {
 
   return (<div>
     {/* Desktop */}
-    <div>
-
+    <div className='d-none d-lg-block mt-2'>
+    {shelfCurrentLoans.length > 0 ? 
+    // List of loans
+    <>
+    </>
+    :
+    // No loans
+    <>
+    </>
+    }
     </div>
 
     {/* Mobile */}
     <div>
-        
+
     </div>
   </div>);
 };
