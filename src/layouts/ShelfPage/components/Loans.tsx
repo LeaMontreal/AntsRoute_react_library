@@ -17,12 +17,16 @@ export const Loans = () => {
   // fetchUserCurrentLoans
   useEffect(() => {
     const fetchUserCurrentLoans = async () => {
-      if (authState && authState.isAuthenticated) {
+      // myDebugForOkta
+      //   if (authState && authState.isAuthenticated)
+      {
         const url = `http://localhost:8080/api/v1/books/secure/currentloans`;
         const requestOptions = {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            // ${authState.accessToken?.accessToken}`,
             "Content-Type": "application/json",
           },
         };
@@ -43,7 +47,9 @@ export const Loans = () => {
 
     // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
-  }, [authState]);
+  }, []);
+  // myDebugForOkta
+  // authState
 
   if (isLoadingUserLoans) {
     return <SpinnerLoading />;
