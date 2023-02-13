@@ -1,3 +1,5 @@
+import { Loans } from "./components/Loans";
+
 export const ShelfPage = () => {
   return (
     <div className="container">
@@ -30,6 +32,18 @@ export const ShelfPage = () => {
             </button>
           </div>
         </nav>
+
+        <div className="tab-content" id="nav-tabContent">
+          {/* Loans list */}
+          <div
+            className="tab-pane fade show active"
+            id="nav-loans"
+            role="tabpanel"
+            aria-labelledby="nav-loans-tab"
+          >
+            <Loans />
+          </div>
+        </div>
       </div>
     </div>
   );
