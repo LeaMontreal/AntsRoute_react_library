@@ -64,12 +64,72 @@ export const Loans = () => {
         {shelfCurrentLoans.length > 0 ? (
           // List of loans
           <>
-              <h5>Current Loans: </h5>
-              {shelfCurrentLoans.map(shelfCurrentLoan=>(
-                <div key={shelfCurrentLoan.book.id}>
+            <h5>Current Loans: </h5>
+            {shelfCurrentLoans.map((shelfCurrentLoan) => (
+              <div key={shelfCurrentLoan.book.id}>
+                <div className="row mt-3 mb-3">
+                  {/* Image of Book */}
+                  <div className="col-4 col-md-4 container">
+                    {shelfCurrentLoan.book?.img ? (
+                      <img
+                        src={shelfCurrentLoan.book?.img}
+                        width="226"
+                        height="349"
+                        alt="Book"
+                      />
+                    ) : (
+                      <img
+                        src={require("./../../../Images/BooksImages/book-luv2code-1000.png")}
+                        width="226"
+                        height="349"
+                        alt="Book"
+                      />
+                    )}
+                  </div>
 
+                  {/* Info card of Book */}
+                  <div className="card col-3 col-md-3 container d-flex">
+                    <div className="card-body">
+                      <div className="mt-3">
+                        <h4>Loan Options</h4>
+                        {/* Show loan info based on daysLeft */}
+                        {shelfCurrentLoan.daysLeft > 0 && (
+                          <p className="text-secondary">
+                            Due in {shelfCurrentLoan.daysLeft} days.
+                          </p>
+                        )}
+                        {shelfCurrentLoan.daysLeft === 0 && (
+                          <p className="text-success">Due Today.</p>
+                        )}
+                        {shelfCurrentLoan.daysLeft < 0 && (
+                          <p className="text-danger">
+                            Past due by {shelfCurrentLoan.daysLeft} days.
+                          </p>
+                        )}
+                        {/* Operation button List */}
+                        <div className="list-group mt-3">
+                          {/* "Manage Loan" will bring user a modal */}
+                          <button
+                            className="list-group-item list-group-item-action"
+                            aria-current="true"
+                            data-bs-toggle="modal"
+                            data-bs-target={`#modal${shelfCurrentLoan.book.id}`}
+                          >
+                            Manage Loan
+                          </button>
+                          <Link
+                            to={"search"}
+                            className="list-group-item list-group-item-action"
+                          >
+                            Search more books?
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </>
         ) : (
           // No loans
