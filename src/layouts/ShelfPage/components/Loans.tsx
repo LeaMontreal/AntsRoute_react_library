@@ -15,12 +15,29 @@ export const Loans = () => {
 
   // fetchUserCurrentLoans
   useEffect(() => {
-    const fetchUserCurrentLoans =async () => {
-        
-    }
-    fetchUserCurrentLoans().catch((error: any)=>{
-        setIsLoadingUserLoans(false);
-        setHttpError(error.message);
+    const fetchUserCurrentLoans = async () => {
+      if (authState && authState.isAuthenticated) {
+        const url = `http://localhost:8080/api/v1/books/secure/currentloans`;
+        const requestOptions = {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        };
+        const shelfCurrentLoansResponse = await fetch(url, requestOptions);
+        if (!shelfCurrentLoansResponse.ok) {
+          throw new Error("Something went wrong!");
+        }
+        const shelfCurrentLoansResponseJson =
+          await shelfCurrentLoansResponse.json();
+        setShelfCurrentLoans(shelfCurrentLoansResponseJson);
+      }
+      setIsLoadingUserLoans(false);
+    };
+    fetchUserCurrentLoans().catch((error: any) => {
+      setIsLoadingUserLoans(false);
+      setHttpError(error.message);
     });
 
     // every time re-rendering, go back to left corner
