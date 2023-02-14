@@ -15,6 +15,9 @@ export const Loans = () => {
   const [isLoadingUserLoans, setIsLoadingUserLoans] = useState(true);
   const [httpError, setHttpError] = useState(null);
 
+  // Is the book already been checked out
+  const [isCheckedout, setIsCheckedout] = useState(false);
+
   // fetchUserCurrentLoans
   useEffect(() => {
     const fetchUserCurrentLoans = async () => {
@@ -48,9 +51,9 @@ export const Loans = () => {
 
     // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
-  }, []);
+  }, [authState, isCheckedout]);
   // myDebugForOkta
-  // authState
+  // authState, isCheckedout
 
   if (isLoadingUserLoans) {
     return <SpinnerLoading />;
@@ -62,6 +65,22 @@ export const Loans = () => {
         <p>{httpError}</p>
       </div>
     );
+  }
+
+  async function returnBook(bookId: number) {
+    const url = `http://localhost:8080/api/v1/books/secure/return/?bookId=${bookId}`;
+    const requestOptions = {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    const returnResponse = await fetch(url, requestOptions);
+    if (!returnResponse.ok) {
+      throw new Error("Something went wrong!");
+    }
+    setIsCheckedout(!isCheckedout);
   }
 
   return (
@@ -150,6 +169,7 @@ export const Loans = () => {
                 <LoansModal
                   shelfCurrentLoan={shelfCurrentLoan}
                   isMobile={false}
+                  returnBook={returnBook}
                 />
               </div>
             ))}
@@ -245,6 +265,7 @@ export const Loans = () => {
                 <LoansModal
                   shelfCurrentLoan={shelfCurrentLoan}
                   isMobile={true}
+                  returnBook={returnBook}
                 />
               </div>
             ))}
