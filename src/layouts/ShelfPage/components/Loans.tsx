@@ -51,7 +51,7 @@ export const Loans = () => {
 
     // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
-  }, [authState, isCheckedout]);
+  }, [isCheckedout]);
   // myDebugForOkta
   // authState, isCheckedout
 
@@ -72,7 +72,9 @@ export const Loans = () => {
     const requestOptions = {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: `Bearer `,
+        // myDebugForOkta
+        // ${authState?.accessToken?.accessToken}`,
         "Content-Type": "application/json",
       },
     };
