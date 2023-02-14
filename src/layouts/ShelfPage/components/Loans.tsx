@@ -132,6 +132,17 @@ export const Loans = () => {
                           </Link>
                         </div>
                       </div>
+
+                      <hr />
+                      <p className="mt-3">
+                        Help other find their adventure by reviewing your loan.
+                      </p>
+                      <Link
+                        className="btn btn-primary"
+                        to={`/checkout/${shelfCurrentLoan.book.id}`}
+                      >
+                        Leave a review
+                      </Link>
                     </div>
                   </div>
                 </div>
