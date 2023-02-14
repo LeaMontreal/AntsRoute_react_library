@@ -90,7 +90,9 @@ export const Loans = () => {
     const requestOptions = {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: `Bearer `,
+        // myDebugForOkta
+        // ${authState?.accessToken?.accessToken}`,
         "Content-Type": "application/json",
       },
     };
