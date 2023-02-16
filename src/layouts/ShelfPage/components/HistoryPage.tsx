@@ -7,6 +7,8 @@ import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 
 export const HistoryPage = () => {
   const { authState } = useOktaAuth();
+
+  // loading status
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
   const [httpError, setHttpError] = useState(null);
 
@@ -17,16 +19,23 @@ export const HistoryPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+  // fetchUserHistory
   useEffect(() => {
     const fetchUserHistory = async () => {
-      if (authState && authState.isAuthenticated) {
+      // myDebugForOkta
+      // if (authState && authState.isAuthenticated)
+      {
         const url = `http://localhost:8080/api/v1/histories/search/findBooksByUserEmail/?userEmail=${
-          authState.accessToken?.claims.sub
+          // myDebugForOkta
+          // authState.accessToken?.claims.sub
+          `watera@gmail.com`
         }&page=${currentPage - 1}&size=5`;
         const requestOptions = {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            // ${authState?.accessToken?.accessToken}`,
             "Content-Type": "application/json",
           },
         };
