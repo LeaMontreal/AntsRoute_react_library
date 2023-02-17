@@ -3,7 +3,6 @@ import { HistoryPage } from "./components/HistoryPage";
 import { Loans } from "./components/Loans";
 
 export const ShelfPage = () => {
-
   const [historyClick, setHistoryClick] = useState(false);
 
   return (
@@ -12,6 +11,7 @@ export const ShelfPage = () => {
         <nav>
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
             <button
+              onClick={() => setHistoryClick(false)}
               className="nav-link active"
               id="nav-loans-tab"
               data-bs-toggle="tab"
@@ -23,7 +23,8 @@ export const ShelfPage = () => {
             >
               Loans
             </button>
-            <button onClick={() => setHistoryClick(true)}
+            <button
+              onClick={() => setHistoryClick(true)}
               className="nav-link"
               id="nav-history-tab"
               data-bs-toggle="tab"
@@ -55,7 +56,7 @@ export const ShelfPage = () => {
             id="nav-history"
             role="tabpanel"
             aria-labelledby="nav-history-tab"
-          >            
+          >
             {historyClick ? <HistoryPage /> : <></>}
           </div>
         </div>
