@@ -16,7 +16,10 @@ export const PostNewMessage = () => {
   // call back function for submit question button
   async function submitNewQuestion() {
     const url = `http://localhost:8080/api/v1/messages/secure/add/message`;
-    if (authState?.isAuthenticated && title !== "" && question !== "") {
+    // myDebugForOkta
+    // if (authState?.isAuthenticated && title !== "" && question !== "") 
+    if (title !== "" && question !== "") 
+    {
       const messageRequestModel: MessageModel = new MessageModel(
         title,
         question
@@ -24,7 +27,9 @@ export const PostNewMessage = () => {
       const requestOptions = {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+          // myDebugForOkta
+          Authorization: `Bearer `,
+          // ${authState?.accessToken?.accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(messageRequestModel),
