@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { PostNewMessage } from "./components/PostNewMessage";
 
 export const MessagesPage = () => {
   const [messagesClick, setMessagesClick] = useState(false);
@@ -17,7 +18,8 @@ export const MessagesPage = () => {
               type="button"
               role="tab"
               aria-controls="nav-send-message"
-              aria-selected="true" >
+              aria-selected="true"
+            >
               Submit Question
             </button>
             <button
@@ -29,11 +31,23 @@ export const MessagesPage = () => {
               type="button"
               role="tab"
               aria-controls="nav-message"
-              aria-selected="false" >
+              aria-selected="false"
+            >
               Q/A Response/Pending
             </button>
           </div>
         </nav>
+
+        <div className="tab-content" id="nav-tabContent">
+          <div
+            className="tab-pane fade show active"
+            id="nav-send-message"
+            role="tabpanel"
+            aria-labelledby="nav-send-message-tab"
+          >
+            <PostNewMessage />
+          </div>
+        </div>
       </div>
     </div>
   );
