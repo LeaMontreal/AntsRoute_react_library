@@ -81,6 +81,7 @@ export const SearchBooksPage = () => {
       setHttpError(error.message);
     });
 
+    // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
 
     // test code for Pagination component

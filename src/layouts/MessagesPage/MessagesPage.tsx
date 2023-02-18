@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Messages } from "./components/Messages";
 import { PostNewMessage } from "./components/PostNewMessage";
 
 export const MessagesPage = () => {
+  // Every time user click the Messages tab, Force Messages page tab refresh.
   const [messagesClick, setMessagesClick] = useState(false);
 
   return (
@@ -46,6 +48,14 @@ export const MessagesPage = () => {
             aria-labelledby="nav-send-message-tab"
           >
             <PostNewMessage />
+          </div>
+          <div
+            className="tab-pane fade"
+            id="nav-message"
+            role="tabpanel"
+            aria-labelledby="nav-message-tab"
+          >
+            {messagesClick ? <Messages /> : <></>}
           </div>
         </div>
       </div>
