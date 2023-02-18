@@ -21,14 +21,21 @@ export const Messages = () => {
   // fetchUserMessages
   useEffect(() => {
     const fetchUserMessages = async () => {
-      if (authState && authState?.isAuthenticated) {
-        const url = `http://localhost:8080/api/v1/messages/search/findByUserEmail/?userEmail=${
-          authState?.accessToken?.claims.sub
-        }&page=${currentPage - 1}&size=${messagesPerPage}`;
+      // myDebugForOkta
+      // if (authState && authState?.isAuthenticated)
+      {
+        // myDebugForOkta
+        // authState.accessToken?.claims.sub
+        const url = `http://localhost:8080/api/v1/messages/search/findByUserEmail/?userEmail=${`watera@gmail.com`}&page=${
+          currentPage - 1
+        }&size=${messagesPerPage}`;
+
         const requestOptions = {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+            Authorization: `Bearer `,
+            // myDebugForOkta
+            // ${authState?.accessToken?.accessToken}`,
             "Content-Type": "application/json",
           },
         };
@@ -37,6 +44,7 @@ export const Messages = () => {
           throw new Error("Something went wrong!");
         }
         const messagesResponseJson = await messagesResponse.json();
+        console.log(messagesResponseJson.page.totalPages);
         setMessages(messagesResponseJson._embedded.messages);
         setTotalPages(messagesResponseJson.page.totalPages);
       }
@@ -49,7 +57,9 @@ export const Messages = () => {
 
     // every time re-rendering, go back to left corner
     window.scrollTo(0, 0);
-  }, [authState, currentPage]);
+  }, [currentPage]);
+  // myDebugForOkta
+  // [authState, currentPage]
 
   if (isLoadingMessages) {
     return <SpinnerLoading />;
