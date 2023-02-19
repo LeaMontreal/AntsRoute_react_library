@@ -73,18 +73,17 @@ export const AdminMessages = () => {
 
   async function submitResponseToQuestion(id: number, response: string) {
     const url = `http://localhost:8080/api/v1/messages/secure/admin/message`;
-    if (
-      authState &&
-      authState?.isAuthenticated &&
-      id !== null &&
-      response !== ""
-    ) {
+    // myDebugForOkta
+    // if ( authState && authState?.isAuthenticated && id !== null && response !== "")
+    if (id !== null && response !== "") {
       const messageAdminRequestModel: AdminMessageRequest =
         new AdminMessageRequest(id, response);
       const requestOptions = {
         method: "PUT",
         headers: {
-          Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+          Authorization: `Bearer `,
+          // myDebugForOkta
+          // ${authState?.accessToken?.accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(messageAdminRequestModel),
@@ -106,7 +105,11 @@ export const AdminMessages = () => {
         <>
           <h5>Pending Q/A: </h5>
           {messages.map((message) => (
-            <AdminMessage message={message} key={message.id} submitResponseToQuestion={submitResponseToQuestion}/>
+            <AdminMessage
+              message={message}
+              key={message.id}
+              submitResponseToQuestion={submitResponseToQuestion}
+            />
           ))}
         </>
       ) : (
