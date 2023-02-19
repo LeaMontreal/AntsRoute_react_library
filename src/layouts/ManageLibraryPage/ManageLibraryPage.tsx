@@ -1,6 +1,7 @@
 import { useOktaAuth } from "@okta/okta-react"; // manually change
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { AdminMessages } from "./components/AdminMessages";
 
 export const ManageLibraryPage = () => {
   const { authState } = useOktaAuth();
@@ -27,9 +28,9 @@ export const ManageLibraryPage = () => {
 
   // myDebugForOkta
   // If undefined user type in /admin, we redirect to home page
-//   if (authState?.accessToken?.claims.userType === undefined) {
-//     return <Redirect to="/home" />;
-//   }
+  //   if (authState?.accessToken?.claims.userType === undefined) {
+  //     return <Redirect to="/home" />;
+  //   }
 
   return (
     <div className="container">
@@ -107,7 +108,7 @@ export const ManageLibraryPage = () => {
             role="tabpanel"
             aria-labelledby="nav-messages-tab"
           >
-            {messagesClick ? <p>Admin Messages</p> : <></>}
+            {messagesClick ? <AdminMessages /> : <></>}
           </div>
         </div>
       </div>
