@@ -1,5 +1,6 @@
 import { useOktaAuth } from "@okta/okta-react"; // manually change
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 export const ManageLibraryPage = () => {
   const { authState } = useOktaAuth();
@@ -24,6 +25,11 @@ export const ManageLibraryPage = () => {
     setMessagesClick(true);
   }
 
+  // If undefined user type in /admin, we redirect to home page
+  if (authState?.accessToken?.claims.userType === undefined) {
+    return <Redirect to="/home" />;
+  }
+
   return (
     <div className="container">
       <div className="mt-5">
@@ -31,7 +37,8 @@ export const ManageLibraryPage = () => {
         {/* tab buttons */}
         <nav>
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
-            <button onClick={addBookClickFunction}
+            <button
+              onClick={addBookClickFunction}
               className="nav-link active"
               id="nav-add-book-tab"
               data-bs-toggle="tab"
@@ -43,7 +50,8 @@ export const ManageLibraryPage = () => {
             >
               Add new book
             </button>
-            <button onClick={changeQuantityOfBooksClickFunction}
+            <button
+              onClick={changeQuantityOfBooksClickFunction}
               className="nav-link"
               id="nav-quantity-tab"
               data-bs-toggle="tab"
@@ -55,7 +63,8 @@ export const ManageLibraryPage = () => {
             >
               Change quantity
             </button>
-            <button onClick={messagesClickFunction}
+            <button
+              onClick={messagesClickFunction}
               className="nav-link"
               id="nav-messages-tab"
               data-bs-toggle="tab"
