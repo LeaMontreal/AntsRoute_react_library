@@ -25,10 +25,11 @@ export const ManageLibraryPage = () => {
     setMessagesClick(true);
   }
 
+  // myDebugForOkta
   // If undefined user type in /admin, we redirect to home page
-  if (authState?.accessToken?.claims.userType === undefined) {
-    return <Redirect to="/home" />;
-  }
+//   if (authState?.accessToken?.claims.userType === undefined) {
+//     return <Redirect to="/home" />;
+//   }
 
   return (
     <div className="container">
