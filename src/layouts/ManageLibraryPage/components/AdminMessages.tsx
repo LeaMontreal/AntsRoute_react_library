@@ -1,5 +1,6 @@
 import { useOktaAuth } from "@okta/okta-react"; // manually change
 import { useEffect, useState } from "react";
+import AdminMessageRequest from "../../../models/AdminMessageRequest";
 import MessageModel from "../../../models/MessageModel";
 import { Pagination } from "../../Utils/Pagination";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
@@ -25,8 +26,8 @@ export const AdminMessages = () => {
 
   useEffect(() => {
     const fetchUserMessages = async () => {
-        // myDebugForOkta
-    //   if (authState && authState.isAuthenticated) 
+      // myDebugForOkta
+      //   if (authState && authState.isAuthenticated)
       {
         const url = `http://localhost:8080/api/v1/messages/search/findByClosed/?closed=false&page=${
           currentPage - 1
@@ -70,6 +71,33 @@ export const AdminMessages = () => {
     );
   }
 
+  async function submitResponseToQuestion(id: number, response: string) {
+    const url = `http://localhost:8080/api/v1/messages/secure/admin/message`;
+    if (
+      authState &&
+      authState?.isAuthenticated &&
+      id !== null &&
+      response !== ""
+    ) {
+      const messageAdminRequestModel: AdminMessageRequest =
+        new AdminMessageRequest(id, response);
+      const requestOptions = {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(messageAdminRequestModel),
+      };
+
+      const messageAdminRequestModelResponse = await fetch(url, requestOptions);
+      if (!messageAdminRequestModelResponse.ok) {
+        throw new Error("Something went wrong!");
+      }
+      setBtnSubmit(!btnSubmit);
+    }
+  }
+
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
@@ -78,7 +106,7 @@ export const AdminMessages = () => {
         <>
           <h5>Pending Q/A: </h5>
           {messages.map((message) => (
-            <AdminMessage message={message} key={message.id}/>
+            <AdminMessage message={message} key={message.id} submitResponseToQuestion={submitResponseToQuestion}/>
           ))}
         </>
       ) : (

@@ -3,12 +3,14 @@ import MessageModel from "../../../models/MessageModel";
 
 export const AdminMessage: React.FC<{
   message: MessageModel;
+  submitResponseToQuestion: any;
 }> = (props, key) => {
   const [displayWarning, setDisplayWarning] = useState(false);
   const [response, setResponse] = useState("");
 
   function submitBtn() {
     if (props.message.id !== null && response !== "") {
+      props.submitResponseToQuestion(props.message.id, response);
       setDisplayWarning(false);
     } else {
       setDisplayWarning(true);
