@@ -19,6 +19,10 @@ export const AddNewBook = () => {
         setCategory(value);
     }
 
+    async function base64ConversionForImages(e: any){
+        console.log(e);
+    }
+
     return (
         <div className='container mt-5 mb-5'>
             {/* prompt message bar */}
@@ -81,7 +85,7 @@ export const AddNewBook = () => {
                                 onChange={e => setCopies(Number(e.target.value))} value={copies}/>
                         </div>
                         {/* File picker */}
-                        <input type='file'/>
+                        <input type='file' onChange={e=>base64ConversionForImages(e)}/>
                         {/* Submit Button */}
                         <div>
                             <button type='button' className='btn btn-primary mt-3'>
