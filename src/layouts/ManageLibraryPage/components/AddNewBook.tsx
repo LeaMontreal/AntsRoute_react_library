@@ -10,6 +10,7 @@ export const AddNewBook = () => {
     const [description, setDescription] = useState('');
     const [copies, setCopies] = useState(0);
     const [category, setCategory] = useState('Category');
+    const [selectedImage, setSelectedImage] = useState<any>(null);
 
     // Displays
     const [displayWarning, setDisplayWarning] = useState(false);
@@ -20,7 +21,26 @@ export const AddNewBook = () => {
     }
 
     async function base64ConversionForImages(e: any){
-        console.log(e);
+        // console.log(e);
+
+        if(e.target.files[0]){
+            getBase64(e.target.files[0]);
+        }
+    }
+
+    // read local file and save result into selectedImage useState()
+    function getBase64(file: any){
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        // read file success
+        reader.onload = function(){
+            setSelectedImage(reader.result);
+        };
+        // read file error
+        reader.onerror = function(error){
+            console.log('File Reader Error', error)
+        }
     }
 
     return (
