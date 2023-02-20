@@ -46,13 +46,29 @@ export const AddNewBook = () => {
 
   async function submitNewBook() {
     const url = `http://localhost:8080/api/v1/admin/secure/add/book`;
-    if (authState?.isAuthenticated && title !== "" && author !== "" &&       category !== "Category" && description !== "" && copies >= 0) {
-      const book: AddBookRequest = new AddBookRequest(title, author,    description, copies, category);
+    // myDebugForOkta
+    // authState?.isAuthenticated &&
+    if (
+      title !== "" &&
+      author !== "" &&
+      category !== "Category" &&
+      description !== "" &&
+      copies >= 0
+    ) {
+      const book: AddBookRequest = new AddBookRequest(
+        title,
+        author,
+        description,
+        copies,
+        category
+      );
       book.img = selectedImage;
       const requestOptions = {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+          Authorization: `Bearer `,
+          // myDebugForOkta
+          //   ${authState?.accessToken?.accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(book),
@@ -204,7 +220,11 @@ export const AddNewBook = () => {
             <input type="file" onChange={(e) => base64ConversionForImages(e)} />
             {/* Submit Button */}
             <div>
-              <button onClick={submitNewBook} type="button" className="btn btn-primary mt-3">
+              <button
+                onClick={submitNewBook}
+                type="button"
+                className="btn btn-primary mt-3"
+              >
                 Add Book
               </button>
             </div>
