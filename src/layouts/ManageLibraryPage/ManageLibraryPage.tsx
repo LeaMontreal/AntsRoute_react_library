@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AddNewBook } from "./components/AddNewBook";
 import { AdminMessages } from "./components/AdminMessages";
+import { ChangeQuantityOfBooks } from "./components/ChangeQuantityOfBooks";
 
 export const ManageLibraryPage = () => {
   const { authState } = useOktaAuth();
@@ -98,7 +99,7 @@ export const ManageLibraryPage = () => {
             aria-labelledby="nav-quantity-tab"
           >
             {changeQuantityOfBooksClick ? (
-              <p>Change Quantity Of Books</p>
+              <ChangeQuantityOfBooks/>
             ) : (
               <></>
             )}

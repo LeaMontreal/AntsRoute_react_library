@@ -31,6 +31,7 @@ export const SearchBooksPage = () => {
     setCurrentPage(pageNumber);
   };
 
+  // fetchBooks
   useEffect(() => {
     const fetchBooks = async () => {
       const baseUrl: string = "http://localhost:8080/api/v1/books";
@@ -58,6 +59,7 @@ export const SearchBooksPage = () => {
       setTotalPages(responseJson.page.totalPages);
 
       const loadedBooks: BookModel[] = [];
+      // Copy books from response to local array
       for (const key in responseData) {
         loadedBooks.push({
           id: responseData[key].id,
