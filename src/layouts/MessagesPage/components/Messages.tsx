@@ -26,7 +26,7 @@ export const Messages = () => {
       {
         // myDebugForOkta
         // authState.accessToken?.claims.sub
-        const url = `http://localhost:8080/api/v1/messages/search/findByUserEmail/?userEmail=${`watera@gmail.com`}&page=${
+        const url = `${process.env.REACT_APP_BASE_URL}/messages/search/findByUserEmail/?userEmail=${`watera@gmail.com`}&page=${
           currentPage - 1
         }&size=${messagesPerPage}`;
 

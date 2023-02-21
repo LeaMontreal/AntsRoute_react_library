@@ -22,7 +22,7 @@ export const ReviewListPage = () => {
   // fetchBookReviewsData
   useEffect(() => {
     const fetchBookReviewsData = async () => {
-      const reviewUrl: string = `http://localhost:8080/api/v1/reviews/search/findByBookId?bookId=${bookId}&page=${
+      const reviewUrl: string = `${process.env.REACT_APP_BASE_URL}/reviews/search/findByBookId?bookId=${bookId}&page=${
         currentPage - 1
       }&size=${reviewsPerPage}`;
 

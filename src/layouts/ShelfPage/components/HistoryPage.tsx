@@ -25,7 +25,7 @@ export const HistoryPage = () => {
       // myDebugForOkta
       // if (authState && authState.isAuthenticated)
       {
-        const url = `http://localhost:8080/api/v1/histories/search/findBooksByUserEmail/?userEmail=${
+        const url = `${process.env.REACT_APP_BASE_URL}/histories/search/findBooksByUserEmail/?userEmail=${
           // myDebugForOkta
           // authState.accessToken?.claims.sub
           `watera@gmail.com`

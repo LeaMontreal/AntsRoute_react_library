@@ -29,7 +29,7 @@ export const AdminMessages = () => {
       // myDebugForOkta
       //   if (authState && authState.isAuthenticated)
       {
-        const url = `http://localhost:8080/api/v1/messages/search/findByClosed/?closed=false&page=${
+        const url = `${process.env.REACT_APP_BASE_URL}/messages/search/findByClosed/?closed=false&page=${
           currentPage - 1
         }&size=${messagesPerPage}`;
         const requestOptions = {
@@ -72,7 +72,7 @@ export const AdminMessages = () => {
   }
 
   async function submitResponseToQuestion(id: number, response: string) {
-    const url = `http://localhost:8080/api/v1/messages/secure/admin/message`;
+    const url = `${process.env.REACT_APP_BASE_URL}/messages/secure/admin/message`;
     // myDebugForOkta
     // if ( authState && authState?.isAuthenticated && id !== null && response !== "")
     if (id !== null && response !== "") {

@@ -45,7 +45,7 @@ export const AddNewBook = () => {
   }
 
   async function submitNewBook() {
-    const url = `http://localhost:8080/api/v1/admin/secure/add/book`;
+    const url = `${process.env.REACT_APP_BASE_URL}/admin/secure/add/book`;
     // myDebugForOkta
     // authState?.isAuthenticated &&
     if (

@@ -15,7 +15,7 @@ export const PostNewMessage = () => {
 
   // call back function for submit question button
   async function submitNewQuestion() {
-    const url = `http://localhost:8080/api/v1/messages/secure/add/message`;
+    const url = `${process.env.REACT_APP_BASE_URL}/messages/secure/add/message`;
     // myDebugForOkta
     // if (authState?.isAuthenticated && title !== "" && question !== "") 
     if (title !== "" && question !== "") 
