@@ -15,6 +15,9 @@ export const ChangeQuantityOfBooks = () => {
   const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
+  // flag means just deleted a book
+  const [bookDelete, setBookDelete] = useState(false);
+
   // fetchBooks
   useEffect(() => {
     const fetchBooks = async () => {
@@ -58,7 +61,7 @@ export const ChangeQuantityOfBooks = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, [currentPage]);
+  }, [currentPage, bookDelete]);
 
   const indexOfLastBook: number = currentPage * booksPerPage;
   const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
@@ -68,6 +71,7 @@ export const ChangeQuantityOfBooks = () => {
       : totalAmountOfBooks;
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const deleteBook = () => setBookDelete(!bookDelete);
 
   if (isLoading) {
     return <SpinnerLoading />;
@@ -93,7 +97,7 @@ export const ChangeQuantityOfBooks = () => {
             {indexOfFirstBook + 1} to {lastItem} of {totalAmountOfBooks} items:
           </p>
           {books.map((book) => (
-            <ChangeQuantityOfBook book={book} key={book.id} />
+            <ChangeQuantityOfBook book={book} key={book.id} deleteBook={deleteBook}/>
           ))}
         </>
       ) : (
