@@ -37,28 +37,28 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/home">
-                Home
-              </NavLink>
+              <NavLink className="nav-link" to="/home"> Home </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/search">
-                Search Books
-              </NavLink>
+              <NavLink className="nav-link" to="/search"> Search Books </NavLink>
             </li>
             {/* myDebugForOkta */}
             <li className="nav-item">
-              <NavLink className="nav-link" to="/shelf">
-                Shelf
-              </NavLink>
+              <NavLink className="nav-link" to="/shelf"> Shelf </NavLink>
             </li>
-            {/* {authState.isAuthenticated && (
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/admin"> Admin </NavLink>
+            </li>
+            {authState.isAuthenticated && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/shelf">
-                  Shelf
-                </NavLink>
+                <NavLink className="nav-link" to="/shelf"> Shelf </NavLink>
               </li>
-            )} */}
+            )}
+            {authState.isAuthenticated && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admin"> Admin </NavLink>
+              </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto">
             {/* myDebugForOkta */}
