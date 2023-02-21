@@ -15,8 +15,8 @@ export const ChangeQuantityOfBooks = () => {
   const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  // flag means just deleted a book
-  const [bookDelete, setBookDelete] = useState(false);
+  // flag change trigger component re-rendering
+  const [bookDeleteFlag, setbookDeleteFlag] = useState(false);
 
   // fetchBooks
   useEffect(() => {
@@ -61,7 +61,7 @@ export const ChangeQuantityOfBooks = () => {
       setIsLoading(false);
       setHttpError(error.message);
     });
-  }, [currentPage, bookDelete]);
+  }, [currentPage, bookDeleteFlag]);
 
   const indexOfLastBook: number = currentPage * booksPerPage;
   const indexOfFirstBook: number = indexOfLastBook - booksPerPage;
@@ -71,7 +71,7 @@ export const ChangeQuantityOfBooks = () => {
       : totalAmountOfBooks;
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-  const deleteBook = () => setBookDelete(!bookDelete);
+  const deleteBook = () => setbookDeleteFlag(!bookDeleteFlag);
 
   if (isLoading) {
     return <SpinnerLoading />;

@@ -19,12 +19,17 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
     fetchBookInState();
   }, []);
 
+  // myDebugForOkta
+  // const authorizationString = `Bearer `;
+
+  const authorizationString = `Bearer ${authState?.accessToken?.accessToken}`;
+
   async function increaseQuantity() {
     const url = `http://localhost:8080/api/v1/admin/secure/increase/book/quantity/?bookId=${props.book?.id}`;
     const requestOptions = {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: authorizationString,
         'Content-Type': 'application/json'
       }
     };
@@ -43,7 +48,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
     const requestOptions = {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: authorizationString,
         'Content-Type': 'application/json'
       }
     };
@@ -62,7 +67,7 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
     const requestOptions = {
       method: 'DELETE',
       headers: {
-        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+        Authorization: authorizationString,
         'Content-Type': 'application/json'
       }
     };
@@ -71,6 +76,8 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
     if (!updateResponse.ok) {
       throw new Error('Something went wrong!');
     }
+
+    // call back, for parent component to change state
     props.deleteBook();
   }
 
