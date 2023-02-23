@@ -15,6 +15,7 @@ import { ReviewListPage } from "./layouts/BookCheckoutPage/ReviewListPage/Review
 import { ShelfPage } from "./layouts/ShelfPage/ShelfPage";
 import { MessagesPage } from "./layouts/MessagesPage/MessagesPage";
 import { ManageLibraryPage } from "./layouts/ManageLibraryPage/ManageLibraryPage";
+import { PaymentPage } from "./layouts/PaymentPage/PaymentPage";
 
 const oktaAuth = new OktaAuth(oktaConfig.oidc);
 
@@ -66,10 +67,18 @@ export const App = () => {
             />
             <Route path="/login/callback" component={LoginCallback} />
             {/* myDebugForOkta */}
-            {/* <SecureRoute path='/shelf'> <ShelfPage/> </SecureRoute> 
-            <SecureRoute path='/messages'> <MessagesPage/> </SecureRoute>
-            <SecureRoute path='/admin'> <ManageLibraryPage/> </SecureRoute>
-            */}
+            <SecureRoute path="/shelf">
+              <ShelfPage />
+            </SecureRoute>
+            <SecureRoute path="/messages">
+              <MessagesPage />
+            </SecureRoute>
+            <SecureRoute path="/admin">
+              <ManageLibraryPage />
+            </SecureRoute>
+            <SecureRoute path="/fees">
+              <PaymentPage />
+            </SecureRoute>
 
             <Route path="/shelf">
               <ShelfPage />
@@ -79,6 +88,9 @@ export const App = () => {
             </Route>
             <Route path="/admin">
               <ManageLibraryPage />
+            </Route>
+            <Route path="/fees">
+              <PaymentPage />
             </Route>
           </Switch>
         </div>

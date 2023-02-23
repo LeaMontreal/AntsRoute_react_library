@@ -20,9 +20,9 @@ export const ChangeQuantityOfBook: React.FC<{ book: BookModel, deleteBook: any }
   }, []);
 
   // myDebugForOkta
-  // const authorizationString = `Bearer `;
+  const authorizationString = `Bearer `;
 
-  const authorizationString = `Bearer ${authState?.accessToken?.accessToken}`;
+  // const authorizationString = `Bearer ${authState?.accessToken?.accessToken}`;
 
   async function increaseQuantity() {
     const url = `${process.env.REACT_APP_BASE_URL}/admin/secure/increase/book/quantity/?bookId=${props.book?.id}`;

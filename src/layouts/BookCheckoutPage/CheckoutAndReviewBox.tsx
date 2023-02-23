@@ -43,9 +43,7 @@ export const CheckoutAndReviewBox: React.FC<{
   function reviewRender() {
     if (props.isAuthenticated && !props.isReviewLeft) {
       return (
-        <p>
           <LeaveAReview submitReview={props.submitReview} />
-        </p>
       );
     } else if (props.isAuthenticated && props.isReviewLeft) {
       return (
