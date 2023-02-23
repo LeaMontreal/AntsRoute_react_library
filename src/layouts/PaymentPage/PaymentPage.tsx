@@ -10,13 +10,19 @@ export const PaymentPage = () => {
   const [httpError, setHttpError] = useState(false);
   const [isLoadingFees, setIsLoadingFees] = useState(true);
 
-  const authorizationString = `Bearer ${authState?.accessToken?.accessToken}`;
-  const userEmail = `authState.accessToken?.claims.sub`;
+  // myDebugForOkta
+  const authorizationString = `Bearer `;
+  const userEmail = `watera@gmail.com`;
+
+  // const authorizationString = `Bearer ${authState?.accessToken?.accessToken}`;
+  // const userEmail = `authState.accessToken?.claims.sub`;
 
   // fetchFees
   useEffect(() => {
     const fetchFees = async () => {
-      if (authState && authState.isAuthenticated) {
+      // myDebugForOkta
+      // if (authState && authState.isAuthenticated) 
+      {
         const url = `${process.env.REACT_APP_BASE_URL}/payments/search/findByUserEmail?userEmail=${userEmail}`;
         const requestOptions = {
           method: "GET",
