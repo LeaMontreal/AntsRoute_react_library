@@ -67,7 +67,7 @@ export const App = () => {
             />
             <Route path="/login/callback" component={LoginCallback} />
             {/* myDebugForOkta */}
-            <SecureRoute path="/shelf">
+            {/* <SecureRoute path="/shelf">
               <ShelfPage />
             </SecureRoute>
             <SecureRoute path="/messages">
@@ -78,7 +78,7 @@ export const App = () => {
             </SecureRoute>
             <SecureRoute path="/fees">
               <PaymentPage />
-            </SecureRoute>
+            </SecureRoute> */}
 
             <Route path="/shelf">
               <ShelfPage />

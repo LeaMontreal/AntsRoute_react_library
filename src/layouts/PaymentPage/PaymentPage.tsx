@@ -12,6 +12,9 @@ export const PaymentPage = () => {
   const [httpError, setHttpError] = useState(false);
   const [isLoadingFees, setIsLoadingFees] = useState(true);
 
+  const elements = useElements();
+  const stripe = useStripe();
+
   // lock flag for avoiding repeat sending paymentInfo
   const [submitDisabled, setSubmitDisabled] = useState(false);
 
@@ -63,18 +66,14 @@ export const PaymentPage = () => {
     );
   }
 
-  const elements = useElements();
-  const stripe = useStripe();
-
-  async function checkout() {
+  async function checkout() { 
       if (!stripe || !elements || !elements.getElement(CardElement)) {
           return;
       }
 
       // set lock flag for avoiding repeat sending paymentInfo
       setSubmitDisabled(true);
-
-      let paymentInfo = new PaymentInfoRequest(Math.round(fees * 100), 'USD', userEmail);
+      let paymentInfo = new PaymentInfoRequest(Math.round(fees * 100), 'USD', `watera@gmail.com`);
 
       const url = `${process.env.REACT_APP_BASE_URL}/payment/secure/payment-intent`;
       const requestOptions = {
